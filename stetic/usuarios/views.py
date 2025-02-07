@@ -28,7 +28,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"Bem-vindo, {username}!")
-                return redirect('home')
+                return redirect('listar_agendamentos')
         messages.error(request, "Usuário ou senha inválidos")
     else:
         form = AuthenticationForm

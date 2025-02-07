@@ -1,9 +1,9 @@
 from django.urls import path
-
+from django.contrib.auth.views import LoginView
 from .views import editar_agendamento, editar_procedimento, excluir_procedimento, listar_procedimentos, meu_cadastro, registro, login_view, logout_view, home, listar_pacientes, cadastrar_paciente, cadastrar_procedimento, listar_agendamentos, agendar_procedimento
 
 urlpatterns = [
-    path('', listar_agendamentos, name='home'),
+    path('', LoginView.as_view(template_name='usuarios/login.html'), name='login'),
     path('registro/', registro, name='registro'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
