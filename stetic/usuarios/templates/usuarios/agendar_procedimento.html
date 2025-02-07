@@ -1,0 +1,32 @@
+{% extends "usuarios/base.html" %}
+
+{% block title %}Clinic Connect - Agendamento{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h2>Agendar Procedimento</h2>
+
+    <div class="card shadow-sm p-4 mt-3">
+        <form method="POST" class="row g-3">
+            {% csrf_token %}
+            <div class="col-md-6"> 
+                <label for="paciente" class="form-label">Paciente</label>
+                {{ form.paciente }}
+            </div>
+            <div class="col-md-7"> 
+                <label for="procedimento" class="form-label">Procedimento</label>
+                {{ form.procedimento }}
+            </div>
+            <div class="col-md-8"> 
+                <label for="data" class="form-label">Data</label>
+                {{ form.data_horario }}
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary" href="{% url 'listar_procedimentos' %}">Agendar</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock content %}

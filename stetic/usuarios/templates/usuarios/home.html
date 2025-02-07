@@ -1,0 +1,16 @@
+{% extends "usuarios/base.html" %}
+
+{% block title %}Clinic Connect{% endblock title %}
+
+{% block content %}
+<h3>Bem-vindo!</h3>
+{% if user.is_authenticated %}
+  <p>Olá, {{ user.username }}!</p>
+  <a href="{% url 'listar_pacientes' %}">Pacientes</a>
+  <a href="{% url 'listar_procedimentos' %}">Procedimentos</a>
+  <a href="{% url 'listar_agendamentos' %}">Agendamentos</a>
+  <a href="{% url 'logout' %}">Sair</a>
+{% else %}
+  <a href="{% url 'login' %}">Login</a> | <a href="{% url 'registro' %}">Registrar</a>
+{% endif %}
+{% endblock content %}

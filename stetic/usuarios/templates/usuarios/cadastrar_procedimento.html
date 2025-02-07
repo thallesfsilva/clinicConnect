@@ -1,0 +1,26 @@
+{% extends "usuarios/base.html" %}
+
+{% block title %}Clinic Connect{% endblock title %}
+
+{% block content %}
+<h2>Cadastrar Procedimento</h2>
+<div class="card shadow-sm p-4 mt-3">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="col-md-2"> 
+            <label for="nome" class="form-label">Nome</label>
+            {{ form.nome }}
+        </div>
+        <div class="col-md-2"> 
+            <label for="preco" class="form-label">Preço</label>
+            {{ form.preco }}
+        </div>
+        <div class="col-md-6"> 
+            <label for="desc" class="form-label">Descrição</label>
+            {{ form.descricao }}
+        </div>
+        <button type="submit" class="btn btn-primary" href="{% url 'listar_procedimentos' %}">Salvar</button>
+    </form>
+</div>
+
+{% endblock content %}

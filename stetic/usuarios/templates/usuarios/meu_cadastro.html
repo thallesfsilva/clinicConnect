@@ -1,0 +1,12 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Meu Cadastro{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Meu Cadastro</h2>
+    <p><strong>Nome de usuário:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Nome Completo:</strong> {{ user.get_full_name }}</p>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Excluir Procedimento{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Tem certeza que deseja excluir "{{ procedimento.nome }}"?</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Excluir</button>
+        <a href="{% url 'listar_procedimentos' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

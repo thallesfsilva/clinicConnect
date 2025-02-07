@@ -1,0 +1,27 @@
+{% extends "usuarios/base.html" %}
+
+{% block title %}Clinic Connect{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Login</h2>
+    <div class="card shadow-sm p-4 mt-3 text-center">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="col-md-15">
+                <label for="username" class="form-label">Usuário</label>
+                {{ form.username }}
+            </div>
+            <div class="col-md-15"> 
+                <label for="password" class="form-label">Senha</label>
+                {{ form.password }}
+            </div>
+            <button type="submit">Entrar</button>
+            <p>Não tem uma conta?<a href="{% url 'registro' %}">Registre-se</a></p>
+        </form>
+    </div>
+    
+</div>
+
+{% endblock content %}

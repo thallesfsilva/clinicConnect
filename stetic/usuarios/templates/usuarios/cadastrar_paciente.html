@@ -1,0 +1,37 @@
+{% extends "usuarios/base.html" %}
+
+{% block title %}Clicnic Connect - Cadastrar Paciente{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <h2 class="text-center mt-4">Cadastrar Paciente</h2>
+
+  <div class="card shadow-sm p-4 mt-3">
+    <form method="POST" class="row g-3">
+      {% csrf_token %}
+      <div class="col-md-6"> 
+        <label for="nome" class="form-label">Nome</label>
+        {{ form.nome }}
+      </div>
+      <div class="col-md-6"> 
+        <label for="telefone" class="form-label">Telefone</label>
+        {{ form.telefone }}
+      </div>
+      <div class="col-md-6"> 
+        <label for="data_nasciment" class="form-label">Data de Nascimento</label>
+        {{ form.data_nascimento }}
+      </div>
+      <div class="col-md-8"> 
+        <label for="endereco" class="form-label">Endereço</label>
+        {{ form.endereco }}
+                
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary" href="{% url 'listar_pacientes' %}">Cadastrar</button>
+      </div>
+    </form>
+  </div> 
+
+</div>
+
+{% endblock content %}

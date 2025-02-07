@@ -1,0 +1,29 @@
+{% extends "usuarios/base.html" %}
+
+{% block title %}Clinic Connect - Procedimentos{% endblock title %}
+
+{% block content %}
+<h2>Meus Procedimentos</h2>
+<a href="{% url 'cadastrar_procedimento' %}">Adicionar Procedimento</a>
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Preço</th>
+        <th></th>
+    </tr>
+    {% for procedimento in procedimentos %}
+        <tr>
+            <td>{{ procedimento.nome }}</td>
+            <td>{{ procedimento.descricao }}</td>
+            <td>{{ procedimento.preco }}</td>
+            <td>
+                <a href="{% url 'editar_procedimento' procedimento.pk %}" class="btn btn-warning btn-sm">Editar</a>
+            </td>
+        </tr>
+    {% empty %}
+        <p>Nenhum procedimento cadastrado</p>    
+    {% endfor %}
+</table>
+
+{% endblock content %}

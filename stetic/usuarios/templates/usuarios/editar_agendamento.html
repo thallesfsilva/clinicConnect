@@ -1,0 +1,32 @@
+{% extends "usuarios/base.html" %}
+
+{% block title %}Clinic Content - Agendamento{% endblock title %}
+
+{% block content %}
+<h2>Editar Agendamento</h2>
+<div class="card shadow-ms p-4 g-3">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="col-md-7"> 
+            <label for="paciente" class="form-label">Paciente</label>
+            {{ form.paciente }}
+        </div>
+        <div class="col-md-6"> 
+            <label for="procedimento" class="form-label">Procedimento</label>
+            {{ form.procedimento }}
+        </div>
+        <div class="col-md-7"> 
+            <label for="data" class="form-label">Data</label>
+            {{ form.data_horario }}
+        </div>
+        <div class="col-md-7"> 
+            <label for="status" class="form-label">Status</label>
+            {{ form.status }}
+        </div>
+        </br>
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary" href="{% url 'listar_procedimentos' %}">Salvar</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
