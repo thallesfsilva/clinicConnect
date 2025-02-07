@@ -31,7 +31,7 @@ class Agendamento(models.Model):
         ('Marcado', 'Marcado'),
         ('Realizado', 'Realizado'),
         ('Pago', 'Pago'),
-        ('Cancelado', 'Caancelado'), 
+        ('Cancelado', 'Cancelado'), 
     ]
 
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name='agendamentos')
