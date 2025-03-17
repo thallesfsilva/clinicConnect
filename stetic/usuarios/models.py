@@ -1,3 +1,4 @@
+from datetime import date
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -43,4 +44,41 @@ class Agendamento(models.Model):
     def __str__(self):
         return f"{self.procedimento.nome} - {self.paciente.nome} em {self.data_horario.strftime('%d/%m/%Y %H:%M') if self.data_horario else 'Sem data' ({self.get_status_display()})}"
 
+
+class Fatura(models.Model):
+    usuario = models.ForeignKey(UsuarioPersonalizado, on_delete=models.CASCADE)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    data_de_emissao = models.DateField(default=date.today)
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
+    pago = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Fatura #{self.id} para {self.paciente.nome} - Total: R$ {self.valor_total}"
     
+class ItemFatura(models.Model):
+    fatura = models.ForeignKey(Fatura, related_name='itens', on_delete=models.CASCADE)
+    procedimento = models.ForeignKey(Procedimento, on_delete=models.SET_NULL, null=True)
+    descricao = models.CharField(max_length=100)
+    valor = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.descricao} - R$ {self.valor}"
+    
+class Pagamento(models.Model):
+    FORMA_PAGAMENTO_CHOICES = [
+        ('Dinheiro', 'Dinheiro'),
+        ('Cartão de Crédito', 'Cartão de Crédito'),
+        ('Cartão de Débito', 'Cartão de Débito'),
+        ('PIX', 'PIX'),
+        ('Boleto Bancário', 'Boleto Bancário'),
+        ('Transferência Bancária', 'Transferência Bancária'),
+    ]
+
+    fatura = models.ForeignKey(Fatura, on_delete=models.CASCADE, related_name='pagamentos')
+    data_pagamento = models.DateField(default=date.today)
+    valor_pago = models.DecimalField(max_digits=10, decimal_places=2)
+    forma_pagamento = models.CharField(max_length=20, choices=FORMA_PAGAMENTO_CHOICES)
+    observacoes = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Pagamento de R$ {self.valor_pago} em {self.get_forma_pagamento_display()} para Fatura #{self.fatura.id}"
